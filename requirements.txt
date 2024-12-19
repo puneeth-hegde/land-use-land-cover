@@ -1,0 +1,8 @@
+torch==2.1.0
+torchvision==0.15.0
+PILLOW==9.2.0
+matplotlib==3.6.3
+numpy==1.24.3
+pandas==1.5.3
+plotly==5.10.0
+flask==2.2.2
