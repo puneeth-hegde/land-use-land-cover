@@ -1,123 +1,133 @@
-# Land Use Land Cover Project
+# 🌍 Land Use and Land Cover Change Detection
 
-## Overview
-This project analyzes geographical aspects of land use using annual NLCD satellite images. It includes preprocessing of images, pixel-level segmentation for detecting geographical features (e.g., water bodies, forests), trend analysis of land-use changes over time, and predictive modeling. The goal is to provide insights into how geographical aspects have evolved over the years and predict future changes.
+A Deep Learning–based system to analyze and predict Land Use and Land Cover (LULC) changes over time using satellite images. This project helps in understanding environmental trends like deforestation, urbanization, and water body shrinkage by leveraging segmentation, analysis, and forecasting models.
 
-## Project Structure
+---
+
+## 🔍 Problem Statement
+
+Climate change, urban expansion, and human activities drastically alter land use patterns. This project aims to:
+
+- Detect various geographical aspects (e.g., forests, water bodies, barren land)
+- Track changes across multiple years
+- Predict future LULC distribution using machine learning models
+
+---
+
+## 👤 My Role
+
+> This project was completed as a team of 4 during our final year engineering project.
+
+- **Puneeth Hegde** – Data preprocessing, pipeline building, visualization, final integration  
+- **Sarvan D Suvarna** – Dataset collection and augmentation  
+- **Shamith Vakwadey** – Model training and tuning  
+- **Abhishek M** – Results analysis and documentation
+
+---
+
+## 🗂️ Project Structure
+
 ```
 land_use_project/
-│
 ├── data/
-│   ├── raw/
-│   │   ├── images/         # Contains the raw annual NLCD images in TIFF format
-│   ├── processed/          # Processed images sorted chronologically
-│   ├── analysis_results/   # Results of area calculations and aspect changes
+│   ├── raw/                 # Raw NLCD images in TIFF format
+│   ├── processed/           # Preprocessed images (resized, sorted)
+│   └── analysis_results/    # Calculated area statistics per region
 │
 ├── models/
-│   └── trend_predictor.pkl # Trained model for predicting trends
+│   └── trend_predictor.pkl  # Trained model for forecasting changes
 │
 ├── scripts/
-│   ├── preprocess.py       # Preprocess and sort images using metadata
-│   ├── analyze.py          # Analyze geographical aspects in images
-│   ├── train_predictor.py  # Train model to predict future trends
-│   ├── dashboard.py        # Create an interactive dashboard
-│   ├── utils/
-│       ├── metadata_utils.py  # Utilities for reading and processing metadata
-│       └── image_utils.py     # Utilities for handling images
+│   ├── preprocess.py        # Cleans & prepares data
+│   ├── analyze.py           # Segments land cover types & calculates area
+│   ├── train_predictor.py   # Trains forecasting model
+│   ├── dashboard.py         # Builds interactive dashboard (Dash)
+│   └── utils/
+│       ├── metadata_utils.py
+│       └── image_utils.py
 │
-├── main.py                 # Main script to execute the project pipeline
-└── requirements.txt        # Python dependencies
+├── main.py                  # One-click full pipeline execution
+└── requirements.txt         # All required packages
 ```
 
-## Prerequisites
-Before running the project, ensure that the following dependencies are installed:
+---
 
-- Python 3.x
-- Pip (for installing Python packages)
+## 🚀 How to Run the Project
 
-You can install the required dependencies by running the following command:
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/puneeth-hegde/land-use-land-cover
+cd land-use-land-cover
 ```
+
+### 2. Install Dependencies
+
+Make sure you have **Python 3.x** installed.
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Running the Project
-Follow the steps below to run the project:
+### 3. Prepare Your Dataset
 
-### Step 1: Prepare the Data
-Ensure your raw NLCD images and corresponding metadata files are placed in the following directory structure:
+Organize your NLCD TIFF images by region and year:
 
 ```
 data/
-├── raw/
-│   ├── region_1/
-│   ├── region_2/
-│   └── region_3/
+└── raw/
+    ├── region_1/
+    ├── region_2/
+    └── region_3/
 ```
 
-Each region folder should contain the TIFF images.
+Each region folder should contain TIFF images sorted by year.
 
-### Step 2: Preprocess the Data
-To preprocess the images and sort them chronologically based on the metadata, run the `preprocess.py` script. This will also resize the images if needed for model training.
+---
 
-```
-python scripts/preprocess.py
-```
+### 4. Run the Full Pipeline
 
-This will organize the images into the `data/processed/` folder, sorted by year for each region.
-
-### Step 3: Analyze the Geographical Aspects
-Next, you can run the `analyze.py` script to detect geographical features (like water bodies, forests) and calculate their areas. This analysis will be saved in the `data/analysis_results/` directory.
-
-```
-python scripts/analyze.py
-```
-
-### Step 4: Train the Predictive Model
-To train the model for predicting land-use trends, run the `train_predictor.py` script. This will use the processed images and analysis results to train a model saved in the `models/` directory.
-
-```
-python scripts/train_predictor.py
-```
-
-### Step 5: View the Interactive Dashboard
-After running the analysis, you can create an interactive dashboard using `dashboard.py`. The dashboard will allow you to select a region and year, then display a pie chart showing the geographical aspect areas and a graph indicating trends over time.
-
-```
-python scripts/dashboard.py
-```
-
-### Step 6: Main Script
-If you want to run the full pipeline (preprocessing, analysis, and model training), simply execute the `main.py` script. This will automatically call the necessary scripts in sequence.
-
-```
+```bash
 python main.py
 ```
 
-## Folder Structure
-- `data/raw/`: Contains raw satellite images and metadata files.
-- `data/processed/`: Contains processed and sorted images for training or analysis.
-- `data/analysis_results/`: Stores the results of area calculations and geographical aspect detections.
-- `models/`: Contains the trained model (`trend_predictor.pkl`) for predicting future trends.
-- `scripts/`: Contains all the Python scripts for preprocessing, analysis, training, and dashboard creation.
-- `requirements.txt`: Lists all the required Python packages.
+Or run steps individually:
 
-## Dependencies
-The project requires the following Python packages, which are listed in `requirements.txt`:
-
-- numpy
-- pandas
-- matplotlib
-- scikit-learn
-- geopandas
-- opencv-python
-- dash (for the interactive dashboard)
-
-Install them using:
-
+```bash
+python scripts/preprocess.py        # Prepare & resize images
+python scripts/analyze.py           # Detect & quantify features
+python scripts/train_predictor.py   # Train ML model
+python scripts/dashboard.py         # Launch dashboard (localhost)
 ```
+
+---
+
+## 📊 Output
+
+- 📌 Pie charts of land types per region/year  
+- 📈 Time-series graphs of land cover trends  
+- 📍 Forecasted LULC map for the next 10 years  
+- 🖥️ Interactive real-time dashboard built using Dash
+
+---
+
+## 📦 Requirements
+
+All dependencies are listed in `requirements.txt`, including:
+
+- numpy, pandas, matplotlib  
+- opencv-python, geopandas  
+- scikit-learn  
+- dash, plotly  
+
+To install them:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
