@@ -19,7 +19,7 @@ Climate change and rapid urbanization alter land use patterns. This project:
 
 ## 👤 My Role
 
-> Team project (4 members) completed in final year.
+> Team project (4 members) completed in pre final year.
 
 - **Puneeth Hegde** – Data preprocessing, training the **U-Net (TensorFlow)**, pipeline integration, visualizations  
 - **Sarvan D Suvarna** – Dataset collection & augmentation  
