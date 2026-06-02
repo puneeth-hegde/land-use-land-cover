@@ -1,159 +1,110 @@
-# 🌍 Land Use and Land Cover Change Detection (U-Net + TensorFlow)
+# Land Use Land Cover Classification using U-Net
 
-A **deep-learning semantic segmentation** system for Land Use/Land Cover (LULC) using satellite imagery.  
-The core model is a **U-Net** implemented in **TensorFlow/Keras**. It produces pixel-wise masks for classes
-such as vegetation, water, urban/built-up, barren, etc., and then performs **change analysis** and **trend
-visualization** across years/regions.
+This project uses satellite images from 1994 to 2023 to classify land into different categories like water, urban areas, vegetation, etc., using a deep learning model called **U-Net**.
 
----
-
-## 🔍 Problem Statement
-
-Climate change and rapid urbanization alter land use patterns. This project:
-
-- Segments satellite images into LULC classes with **U-Net (TensorFlow)**  
-- Compares masks across time to quantify **area changes**  
-- Visualizes **class distribution** and **temporal trends** per region
+It also includes a **dashboard** that shows how land use has changed over time.
 
 ---
 
-## 👤 My Role
+## <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline"><path d="M14.7 6.3l3 3M10.2 4.6l2.3 2.3-8.5 8.5c-.8.8-.8 2 0 2.8l2.1 2.1c.8.8 2 .8 2.8 0l8.5-8.5 2.3 2.3c.4.4 1 .4 1.4 0l.7-.7c.4-.4.4-1 0-1.4l-8-8c-.4-.4-1-.4-1.4 0l-.7.7c-.4.4-.4 1 0 1.4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> What This Project Does
 
-> Team project (4 members) .
-
-- **Puneeth Hegde** – Data preprocessing, training the **U-Net (TensorFlow)**, pipeline integration, visualizations  
-- **Sarvan D Suvarna** – Dataset collection & augmentation  
-- **Shamith Vakwadey** – Experiment design & hyperparameter tuning  
-- **Abhishek M** – Results analysis & documentation
+- **Satellite Image Segmentation**: Uses a U-Net model (TensorFlow/Keras) to classify land types.
+- **Change Analysis**: Analyzes pixel-wise distribution to track land-use changes over decades.
+- **Interactive Dashboard**: Visualizes results with Plotly/Dash charts and trend lines.
 
 ---
 
-## 🗂️ Project Structure
+## <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline"><path d="M3 7v13h18V7M3 7l9-5 9 5M7.5 10.6v.01M7.5 14.6v.01M12 12.6v.01M12 16.6v.01M16.5 10.6v.01M16.5 14.6v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Project Structure
 
 ```
-
-land-use-land-cover/
-├── scripts/
-│   ├── preprocess.py        # Tiling/normalization/splits
-│   ├── segment\_images.py    # Inference with trained U-Net
-│   ├── generate\_masks.py    # Utilities for mask preparation (if needed)
-│   ├── analyze.py           # Area stats & change detection across years
-│   ├── rename\_images.py     # Helper for dataset cleanup
-│   ├── train\_unet.py        # Builds & trains U-Net in TensorFlow/Keras
-│   ├── dash1.py             # Interactive dashboard (Dash)
-│   └── utils/               # Common helpers
-├── main.py                  # End-to-end runner (defaults)
-├── requirements.txt
-├── LICENSE
-└── README.md
-
-````
+├── data/                # Raw satellite imagery and processed CSV results
+├── models/              # Trained U-Net model files (.h5)
+├── scripts/             # Python scripts for the entire pipeline
+│   ├── preprocess.py    # Image normalization and resizing
+│   ├── train_unet.py    # Training logic
+│   ├── segment_images.py# Model inference/prediction
+│   ├── analyze.py       # Area calculation and CSV generation
+│   └── dash1.py         # Dashboard application
+├── requirements.txt     # Python dependencies
+└── README.md            # Documentation
+```
 
 ---
 
-## 🧠 Model: U-Net (TensorFlow/Keras)
+## <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline"><polygon points="5 3 19 12 5 21 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> How to Run
 
-- **Architecture:** Encoder–decoder with skip connections (U-Net)  
-- **Input size:** configurable (e.g., 256×256)  
-- **Loss/metrics:** Cross-Entropy with **Dice/IoU** metrics (configurable in `train_unet.py`)  
-- **Augmentation:** random flips/rotations/crops (set inside the training script)  
-- **Outputs:** multi-class mask per image (one channel per class)
-
-> Set `NUM_CLASSES`, `IMG_SIZE`, and paths at the top of `train_unet.py` (or via CLI args if provided).
-
----
-
-## 🚀 Getting Started
-
-### 1) Clone & Install
+### 1. Environment Setup
+We recommend using a virtual environment (tested on Python 3.10 - 3.12).
 ```bash
-git clone https://github.com/puneeth-hegde/land-use-land-cover
-cd land-use-land-cover
+# Create venv
+python -m venv venv
+
+# Activate venv (Windows)
+.\venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-````
-
-### 2) Prepare Data
-
-Organize imagery and masks (adjust names to your dataset):
-
-```
-data/
-├── raw/                      # original rasters by region/year
-├── images/                   # tiles for training/validation
-├── masks/                    # corresponding label masks
-└── predictions/              # output masks from inference
 ```
 
-Use the helpers as needed:
+### 2. Download Dataset
+The raw satellite imagery and label datasets are stored on Google Drive to keep the repository lightweight. 
+1. Download the dataset from [Google Drive Dataset Link](https://drive.google.com/file/d/1LfEyZjlS-PTKYcVXcke7aGShE1NDWWzY/view?usp=drive_link).
+2. Extract the downloaded folders so that your project structure looks like this:
+   ```
+   ├── data/
+   │   ├── raw/
+   │   │   ├── region_1/
+   │   │   ├── region_2/
+   │   │   └── region_3/
+   │   └── labels/
+   │       ├── region_1/
+   │       ├── region_2/
+   │       └── region_3/
+   ```
 
+### 3. Preprocess Data
+Prepare the raw TIFF images for the model.
 ```bash
-python scripts/preprocess.py        # tile/normalize/split
-python scripts/generate_masks.py    # if you need to build masks from labels
-python scripts/rename_images.py     # optional cleanup
+python scripts/preprocess.py
 ```
 
-### 3) Train the U-Net
-
+### 4. Train the Model (Optional)
+If you want to re-train the U-Net model:
 ```bash
 python scripts/train_unet.py
 ```
 
-This saves the best model (e.g., `models/unet_best.h5`) and logs **IoU/Dice/accuracy**.
-
-### 4) Run Inference (Segmentation)
-
+### 5. Segment and Analyze
+Run inference on images and generate the area analysis CSV.
 ```bash
-python scripts/segment_images.py --model models/unet_best.h5 \
-  --input data/images/test --out data/predictions
+python scripts/segment_images.py
+python scripts/analyze.py
 ```
 
-### 5) Change Analysis & Dashboard
-
+### 6. Run the Dashboard
+Launch the interactive web visualization.
 ```bash
-python scripts/analyze.py  # computes class areas & deltas across years/regions
-python scripts/dash1.py    # launches Dash dashboard (localhost)
+python scripts/dash1.py
 ```
-
-> Or run everything with defaults:
-
-```bash
-python main.py
-```
+Then open [http://127.0.0.1:8050](http://127.0.0.1:8050) in your browser.
 
 ---
 
-## 📊 Outputs
+## <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline"><path d="M3 3v18h18V3H3zm3 6h12M9 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Outputs
 
-* Per-image **segmentation masks** (PNG/GeoTIFF depending on config)
-* **Class-wise area** summaries per region/year
-* **Change maps** and **trend charts** across time
-* Interactive **Dash dashboard** for exploration
-
----
-
-## 🧩 Requirements
-
-Key packages (see `requirements.txt` for exact versions):
-
-* **tensorflow** / **keras**
-* numpy, pandas, scikit-image, opencv-python
-* matplotlib, plotly, dash
-* (optional) rasterio/geopandas for geospatial workflows
-
-Install:
-
-```bash
-pip install -r requirements.txt
-```
+- **`unet_best_model.h5`**: The weights of the trained segmentation model.
+- **`area_analysis1.csv`**: Data file containing area percentages per land class per year.
+- **Interactive Graphs**: Pie charts and trend lines showing environmental changes over time.
 
 ---
 
-## 📄 License
+<div align="center">
+  <h3><img src="https://api.iconify.design/lucide/star.svg?color=%237850ff" width="22" height="22" align="absmiddle" /> If you like this project or find it helpful, please consider giving it a star!</h3>
 
-Licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+  <a href="https://www.linkedin.com/in/sarvan12/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge" />
+  </a>
+</div>
 
 ---
 
-## 🙏 Acknowledgements
-
-U-Net architecture by Ronneberger et al. (2015). Inspired by common remote-sensing LULC practices.
