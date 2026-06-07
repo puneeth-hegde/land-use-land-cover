@@ -1,0 +1,33 @@
+# Ignore virtual environment
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter/IPython checkpoints (if using notebooks)
+.ipynb_checkpoints/
+
+# Ignore model files (if too large or regenerated)
+*.h5
+*.pkl
+
+# Ignore heavy datasets (stored on Google Drive)
+data/raw/
+data/labels/
+data/processed/
+
+# Ignore local analysis results
+data/analysis_results/*
+!data/analysis_results/area_analysis1.csv
+
+# Ignore system/IDE files
+.DS_Store
+.vscode/
+*.log
+
+# Ignore environment config
+.env
+
+# Ignore raw generated web asset images but track classified ones
+scripts/assets/images/raw/
