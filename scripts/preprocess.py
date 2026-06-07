@@ -1,6 +1,7 @@
 import os
 import cv2
 from scripts.utils.image_utils import resize_image
+# from utils.image_utils import resize_image
 import numpy as np
 
 def preprocess_images(region_folders, output_folders):

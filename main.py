@@ -1,25 +1,26 @@
-import os
 from scripts.preprocess import preprocess_images
 from scripts.segment_images import segment_images
 from scripts.analyze import analyze_area
-from scripts.train_unet import train_unet
+from scripts.train_unet import train_model  # originally train_unet()
 from scripts.dashboard import create_dashboard
 
 def main():
-    # Preprocess images (chronologically sort and resize if needed)
+    print("🔄 Preprocessing images...")
     preprocess_images()
 
-    # Segment images and create labels
+    print("🔄 Segmenting images...")
     segment_images()
 
-    # Analyze areas of geographical aspects
+    print("📊 Analyzing area...")
     analyze_area()
 
-    # Train the UNet model
-    train_unet()
+    print("🧠 Training U-Net model...")
+    train_model()
 
-    # Create the dashboard
+    print("📈 Creating dashboard...")
     create_dashboard()
+
+    print("✅ Pipeline completed successfully.")
 
 if __name__ == '__main__':
     main()
