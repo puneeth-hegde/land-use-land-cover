@@ -101,7 +101,7 @@ def train_model():
                   loss='categorical_crossentropy', metrics=['accuracy'])
     
     # Define callbacks
-    checkpoint = ModelCheckpoint('models/unet_best_model.keras', save_best_only=True, monitor='val_loss', mode='min')
+    checkpoint = ModelCheckpoint('models/unet_best_model.h5', save_best_only=True, monitor='val_loss', mode='min')
     
     # Train model with increased epochs and batch size
     model.fit(X_train, y_train, validation_data=(X_val, y_val),

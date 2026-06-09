@@ -1,0 +1,840 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+
+
+body {
+    background-color: #F5F0E8;
+    color: #000000;
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    padding: 25px;
+}
+
+.main-container {
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    color: #000;
+}
+
+/* Header styled like a newspaper headline */
+.dashboard-header {
+    border: 4px solid #000000;
+    background-color: #FFDD00;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 6px 6px 0px #000000;
+    text-align: center;
+    position: relative;
+}
+
+.dashboard-header h1 {
+    font-size: 56px;
+    letter-spacing: -1px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.dashboard-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+/* Main Grid Layout */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 1.6fr;
+    gap: 30px;
+    align-items: stretch; /* Make columns equal height */
+    margin-bottom: 30px; /* Add spacing below the top row */
+}
+
+.main-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-grid .brutalist-card,
+.main-grid .stats-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px !important; /* Remove bottom margins to align bottom borders */
+}
+
+.main-grid .brutalist-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+
+@media screen and (max-width: 1024px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .main-grid .brutalist-card,
+    .main-grid .stats-container {
+        margin-bottom: 20px !important;
+    }
+}
+
+/* Neo-Brutalist Card */
+.brutalist-card {
+    background-color: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    margin-bottom: 30px;
+}
+
+.brutalist-card-header {
+    border-bottom: 3px solid #000000;
+    background-color: #FF4D4D;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+.brutalist-card-header.cyan-header {
+    background-color: #00C2FF;
+    color: #000000;
+}
+
+.brutalist-card-header.yellow-header {
+    background-color: #FFDD00;
+    color: #000000;
+}
+
+.brutalist-card-content {
+    padding: 24px;
+}
+
+/* Form inputs & controls */
+.control-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Preserve default light-theme styling for dropdown in both light and dark modes */
+.dash-dropdown,
+.dash-dropdown *,
+[class*="-control"],
+[class*="-control"] *,
+[class*="-option"],
+[class*="-singleValue"],
+[class*="-placeholder"],
+[class*="-input"] input {
+    color: #000000 !important;
+}
+
+[class*="-control"],
+[class*="-menu"],
+[class*="-option"] {
+    background-color: #FFFFFF !important;
+}
+
+/* Sliders */
+.slider-container {
+    margin-top: 15px;
+    padding: 10px 5px 25px 5px;
+}
+
+.rc-slider-track {
+    background-color: #000000 !important;
+    height: 8px !important;
+}
+
+.rc-slider-rail {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    height: 12px !important;
+}
+
+.rc-slider-handle {
+    border: 3px solid #000000 !important;
+    background-color: #FFDD00 !important;
+    width: 24px !important;
+    height: 24px !important;
+    margin-top: -7px !important;
+    border-radius: 0px !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+}
+
+.rc-slider-handle:hover, .rc-slider-handle:active {
+    background-color: #FF4D4D !important;
+}
+
+.rc-slider-mark-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    color: #000000 !important;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.rc-slider-mark-text-active {
+    color: #FF4D4D !important;
+}
+
+/* Stats cells grid */
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Desktop stats section header — always visible */
+.stats-desktop-header {
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+/* Mobile toggle button — hidden on desktop */
+.stats-toggle-btn {
+    display: none;
+}
+
+.stat-cell {
+    flex: 0 0 calc(25% - 6px);
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 8px 4px;
+    text-align: center;
+    transition: transform 0.1s ease;
+}
+
+.stat-cell:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+}
+
+.stat-cell-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333333;
+    margin-bottom: 4px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 2px;
+}
+
+.stat-cell-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Graphs container */
+.graphs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+    .graphs-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.graph-box {
+    margin-bottom: 0px !important;
+}
+
+.trend-graph {
+    height: 480px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .stats-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .stat-cell {
+        flex: 0 0 calc(50% - 5px); /* 2 columns on mobile */
+    }
+
+    /* Hide desktop header and show mobile toggle button */
+    .stats-desktop-header {
+        display: none;
+    }
+
+    .stats-toggle-btn {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FF4D4D;
+        border: none;
+        border-bottom: 3px solid #000000;
+        box-shadow: none;
+        padding: 12px 20px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-bottom: 0;
+        color: #FFFFFF;
+        box-sizing: border-box;
+    }
+
+    .stats-toggle-btn:hover {
+        background-color: #FF1A1A;
+        color: #FFFFFF;
+    }
+
+    /* Hidden state for stats grid on mobile */
+    .stats-grid-hidden {
+        display: none !important;
+    }
+
+    .trend-graph {
+        height: 500px !important;
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .stat-cell {
+        flex: 0 0 100%; /* 1 column on extra small screens */
+    }
+}
+
+.custom-legend-card {
+    background-color: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 15px;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.custom-legend-card-grid {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.legend-item-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+    .custom-legend-card {
+        padding: 10px;
+        margin: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+
+    .custom-legend-card-grid {
+        padding: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .legend-item-text {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .custom-legend-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .custom-legend-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Image Comparison Row */
+.image-comparison-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.image-container-box {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container-box h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.comparison-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 320px;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+@media screen and (max-width: 768px) {
+    .image-comparison-row {
+        flex-direction: column;
+        gap: 25px;
+        padding: 15px;
+    }
+    
+    .comparison-image {
+        max-height: 220px;
+    }
+}
+
+/* KPI Highlights Row */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1024px) {
+    .kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .kpi-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+.kpi-card {
+    background-color: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.1s ease;
+}
+
+.kpi-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+}
+
+.kpi-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #555555;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.kpi-card-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #000000;
+}
+
+/* KPI Variant Colors */
+.cyan-kpi { border-left: 10px solid #00C2FF; }
+.red-kpi { border-left: 10px solid #FF4D4D; }
+.green-kpi { border-left: 10px solid #2E7D32; }
+.yellow-kpi { border-left: 10px solid #FFDD00; }
+
+/* Colorized KPI values in dark mode */
+.dark-mode .cyan-kpi .kpi-card-value {
+    color: #00C2FF !important;
+}
+
+.dark-mode .red-kpi .kpi-card-value {
+    color: #FF4D4D !important;
+}
+
+.dark-mode .green-kpi .kpi-card-value {
+    color: #81C784 !important;
+}
+
+.dark-mode .yellow-kpi .kpi-card-value {
+    color: #FFDD00 !important;
+}
+
+/* Brutalist Button styling */
+.brutalist-button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #00C2FF; /* Cyan */
+    color: #000000;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-align: center;
+}
+
+.brutalist-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+    background-color: #00B0E6;
+}
+
+.brutalist-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000;
+}
+
+/* Dark Mode overrides */
+body.dark-mode {
+    background-color: #121212 !important;
+}
+
+.dark-mode {
+    background-color: #121212 !important;
+    color: #FFFFFF !important;
+    margin: -25px !important;
+    padding: 25px !important;
+}
+
+.dark-mode .dashboard-header {
+    background-color: #FFDD00 !important;
+    border-bottom: 5px solid #FFFFFF !important;
+    box-shadow: 6px 6px 0px #FFFFFF !important;
+}
+
+.dark-mode .dashboard-header h1,
+.dark-mode .dashboard-header .dashboard-subtitle,
+.dark-mode .dashboard-header label,
+.dark-mode .dashboard-header .theme-label {
+    color: #000000 !important;
+}
+
+.dark-mode .stats-container {
+    background-color: #1A1A1A !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 6px 6px 0px #FFFFFF !important;
+}
+
+.dark-mode h1, 
+.dark-mode h2, 
+.dark-mode h3, 
+.dark-mode h4, 
+.dark-mode label,
+.dark-mode .stats-desktop-header {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .brutalist-card {
+    background-color: #1A1A1A !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 4px 4px 0px #FFFFFF !important;
+}
+
+.dark-mode .brutalist-card-header {
+    border-bottom: 3px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+}
+
+.dark-mode .yellow-header {
+    background-color: #FFDD00 !important;
+    color: #000000 !important;
+}
+
+.dark-mode .cyan-header {
+    background-color: #00C2FF !important;
+    color: #000000 !important;
+}
+
+.dark-mode .brutalist-card-content {
+    background-color: #1A1A1A !important;
+    color: #FFFFFF !important;
+}
+
+/* Dash dropdown controls for dark mode handled via CSS variables */
+
+/* Rc-slider controls for dark mode */
+.dark-mode .slider-container *,
+body.dark-mode .slider-container * {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .rc-slider-rail,
+body.dark-mode .rc-slider-rail,
+.dark-mode .slider-container [class*="rail"],
+body.dark-mode .slider-container [class*="rail"] {
+    background-color: #FFFFFF !important;
+    border: 3px solid #FFFFFF !important;
+}
+
+.dark-mode .rc-slider-track,
+body.dark-mode .rc-slider-track,
+.dark-mode .slider-container [class*="track"],
+body.dark-mode .slider-container [class*="track"] {
+    background-color: #FFDD00 !important; /* Yellow active track in dark mode */
+}
+
+.dark-mode .rc-slider-handle,
+body.dark-mode .rc-slider-handle,
+.dark-mode .slider-container [class*="handle"],
+body.dark-mode .slider-container [class*="handle"] {
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 3px 3px 0px #FFFFFF !important;
+    background-color: #FFDD00 !important;
+}
+
+.dark-mode .rc-slider-dot,
+body.dark-mode .rc-slider-dot,
+.dark-mode .slider-container [class*="dot"],
+body.dark-mode .slider-container [class*="dot"] {
+    background-color: #1A1A1A !important;
+    border: 3px solid #FFFFFF !important;
+}
+
+.dark-mode .rc-slider-dot-active,
+body.dark-mode .rc-slider-dot-active,
+.dark-mode .slider-container [class*="dot-active"],
+body.dark-mode .slider-container [class*="dot-active"] {
+    border-color: #00C2FF !important;
+}
+
+.dark-mode .rc-slider-mark-text,
+.dark-mode .rc-slider-mark-text-active,
+.dark-mode .slider-container span,
+.dark-mode .slider-container div,
+body.dark-mode .rc-slider-mark-text,
+body.dark-mode .rc-slider-mark-text-active,
+body.dark-mode .slider-container span,
+body.dark-mode .slider-container div {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .rc-slider-mark-text-active,
+body.dark-mode .rc-slider-mark-text-active,
+.dark-mode .slider-container [class*="mark-text-active"],
+body.dark-mode .slider-container [class*="mark-text-active"] {
+    color: #00C2FF !important;
+}
+
+/* Slider tooltip styling in dark mode */
+.dark-mode [class*="tooltip"],
+body.dark-mode [class*="tooltip"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.dark-mode .rc-slider-tooltip-inner,
+body.dark-mode .rc-slider-tooltip-inner,
+.dark-mode [class*="tooltip-inner"],
+body.dark-mode [class*="tooltip-inner"] {
+    background-color: #1A1A1A !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+    border-radius: 0px !important;
+}
+
+/* Fix rc-slider tooltip positioning and hidden states in both themes */
+.rc-slider-tooltip,
+[class*="rc-slider-tooltip"],
+[class*="rc-tooltip"] {
+    position: absolute !important;
+    z-index: 1050;
+}
+.rc-slider-tooltip-hidden,
+[class*="tooltip-hidden"] {
+    display: none !important;
+}
+
+.dark-mode .stat-cell {
+    background-color: #222222 !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+.dark-mode .stat-cell-title {
+    color: #CCCCCC !important;
+}
+
+.dark-mode .stat-cell-value {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .custom-legend-card-grid {
+    background-color: #1A1A1A !important;
+}
+
+.dark-mode .legend-item-text {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .image-comparison-row {
+    background-color: #1A1A1A !important;
+}
+
+.dark-mode .comparison-image {
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 5px 5px 0px #FFFFFF !important;
+}
+
+.dark-mode .kpi-card {
+    background-color: #1A1A1A !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 4px 4px 0px #FFFFFF !important;
+}
+
+.dark-mode .kpi-card:hover {
+    box-shadow: 6px 6px 0px #FFFFFF !important;
+}
+
+.dark-mode .kpi-card-title {
+    color: #AAAAAA !important;
+}
+
+.dark-mode .kpi-card-value {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .brutalist-button {
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 4px 4px 0px #FFFFFF !important;
+    background-color: #00C2FF !important;
+    color: #000000 !important;
+}
+
+.dark-mode .brutalist-button:hover {
+    box-shadow: 6px 6px 0px #FFFFFF !important;
+    background-color: #00B0E6 !important;
+}
+
+.dark-mode .stats-toggle-btn {
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 3px 3px 0px #FFFFFF !important;
+    background-color: #FFDD00 !important;
+    color: #000000 !important;
+}
+
+.dark-mode .theme-label {
+    color: #FFFFFF !important;
+}
+
+/* Style the RadioItems for Brutalist theme mode toggle */
+.theme-selector-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    padding: 6px 12px;
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.dark-mode .theme-selector-box {
+    background: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 3px 3px 0px #FFFFFF !important;
+}
+
+.dark-mode .theme-selector-box label {
+    color: #000000 !important;
+}
+
+.theme-selector-box label {
+    display: inline-block !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    vertical-align: middle;
+}
+
+.theme-radio label {
+    display: inline-block !important;
+    margin-right: 15px;
+    margin-bottom: 0 !important;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .dashboard-header {
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 4px 4px 0px #000000;
+    }
+    .dark-mode {
+        margin: -10px !important;
+        padding: 10px !important;
+    }
+    .dashboard-header h1 {
+        font-size: 28px !important;
+    }
+    .dashboard-subtitle {
+        font-size: 11px !important;
+        letter-spacing: 1px !important;
+    }
+}
+
+/* Completely hide the default slider input box in both themes */
+.dash-range-slider-input,
+[class*="dash-range-slider-input"] {
+    display: none !important;
+}
